@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:17.5
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_DB: nubank_desafio
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"

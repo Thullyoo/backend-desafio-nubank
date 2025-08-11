@@ -2,7 +2,12 @@ package br.thullyoo.backend_desafio_nubank.mapper;
 
 import br.thullyoo.backend_desafio_nubank.dtos.ClientRequest;
 import br.thullyoo.backend_desafio_nubank.dtos.ClientResponse;
+import br.thullyoo.backend_desafio_nubank.dtos.ContactResponse;
 import br.thullyoo.backend_desafio_nubank.model.Client;
+import br.thullyoo.backend_desafio_nubank.model.Contact;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientMapper {
 
@@ -32,7 +37,13 @@ public class ClientMapper {
 
     public static ClientResponse clientToClientResponse(Client client){
 
-        return new ClientResponse(client.getName(), client.getEmail(), client.getDocument());
+        List<ContactResponse> contacts = new ArrayList<>();
+
+        for (Contact contact : client.getContacts()){
+            contacts.add(ContactMapper.contactToContactResponse(contact));
+        }
+
+        return new ClientResponse(client.getName(), client.getEmail(), client.getDocument(), contacts);
 
     }
 
